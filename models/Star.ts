@@ -1,4 +1,4 @@
-import { scaleInRange } from '../utils/helpers';
+import { hexToRgba, scaleInRange } from '../utils/helpers';
 
 export class Star {
   x: number;
@@ -6,13 +6,14 @@ export class Star {
   slope: number;
   opacity: number;
   speed: number;
-
-  constructor(canvasWidth: number, canvasHeight: number) {
+  colour: string;
+  constructor(canvasWidth: number, canvasHeight: number, colour: string) {
     this.x = Math.floor(Math.random() * canvasWidth - canvasWidth / 2);
     this.y = Math.floor(Math.random() * canvasHeight - canvasHeight / 2);
     this.slope = this.y / this.x;
     this.opacity = 0;
     this.speed = Math.random() * 2;
+    this.colour = colour
   }
 
   update(ctx: CanvasRenderingContext2D) {
@@ -35,7 +36,7 @@ export class Star {
     }
   }
   show(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "rgba(255, 255, 255, " + this.opacity + ")";
+    ctx.fillStyle = hexToRgba(this.colour, this.opacity);
     // ctx.ellipse(
     //   this.x + ctx.canvas.width / 2,
     //   this.y + ctx.canvas.height / 2,

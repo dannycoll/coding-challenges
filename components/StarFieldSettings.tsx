@@ -1,3 +1,5 @@
+import { TwitterPicker } from 'react-color';
+
 import { Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -6,6 +8,10 @@ interface StarFieldSettingsProps {
   canvasWidth: number;
   canvasHeight: number;
   numStars: number;
+  starColor: string;
+  backgroundColor: string;
+  setBackgroundColor: (color: string) => void;
+  setStarColor: (color: string) => void;
   setCanvasWidth: (value: number) => void;
   setCanvasHeight: (value: number) => void;
   setNumStars: (value: number) => void;
@@ -20,6 +26,12 @@ const StarFieldSettings = (props: StarFieldSettingsProps) => {
   const handleNumStarsChange = (event: Event, newValue: number | number[]) => {
     props.setNumStars(newValue as number);
   };
+  const handleStarColorChange = (color: any) => {
+    props.setStarColor(color.hex);
+  };
+  const handleBackgroundColorChange = (color: any) => {
+    props.setBackgroundColor(color.hex);
+  }
   return (
     <Box sx={{ width: "50vw" }} gap={0.5}>
       <Stack spacing={2} direction="row" alignItems="center">
@@ -54,6 +66,22 @@ const StarFieldSettings = (props: StarFieldSettingsProps) => {
           max={1000}
           onChange={handleNumStarsChange}
         />
+      </Stack>
+      <Stack spacing={2} direction="row" alignItems="center">
+        <Box>
+          <p>Background Colour</p>
+          <TwitterPicker
+            color={props.backgroundColor}
+            onChange={handleBackgroundColorChange}
+          />
+        </Box>
+        <Box>
+          <p>Star Colour</p>
+          <TwitterPicker
+            color={props.starColor}
+            onChange={handleStarColorChange}
+          />
+        </Box>
       </Stack>
     </Box>
   );

@@ -10,6 +10,8 @@ const StarProcessing: NextPage = () => {
   const [canvasHeight, setCanvasHeight] = useState(400);
   const [canvasWidth, setCanvasWidth] = useState(400);
   const [numStars, setNumStars] = useState(100);
+  const [starColor, setStarColor] = useState("#ffffff");
+  const [backgroundColor, setBackgroundColor] = useState("#000000");
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -18,6 +20,8 @@ const StarProcessing: NextPage = () => {
           canvasHeight={canvasHeight}
           canvasWidth={canvasWidth}
           numStars={numStars}
+          starColor={starColor}
+          backgroundColor={backgroundColor}
         />
         <StarFieldSettings
           canvasHeight={canvasHeight}
@@ -26,6 +30,10 @@ const StarProcessing: NextPage = () => {
           setCanvasWidth={setCanvasWidth}
           numStars={numStars}
           setNumStars={setNumStars}
+          starColor={starColor}
+          setStarColor={setStarColor}
+          backgroundColor={backgroundColor}
+          setBackgroundColor={setBackgroundColor}
         />
       </div>
     </div>
