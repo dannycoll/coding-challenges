@@ -20,7 +20,7 @@ export class Star {
     let increment = Math.min(this.speed, Math.abs(this.speed / this.slope));
     this.x += this.x > 0 ? increment : -increment;
     this.y = this.slope * this.x;
-    this.opacity += this.speed / 100;
+    this.opacity = Math.min(1, this.opacity+ this.speed/100 );
     if (
       Math.abs(this.x) > ctx.canvas.width / 2 ||
       Math.abs(this.y) > ctx.canvas.height / 2
