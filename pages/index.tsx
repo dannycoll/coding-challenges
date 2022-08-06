@@ -1,8 +1,9 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import type { NextPage } from "next";
+import Head from "next/head";
 
-import Canvas from '../components/Canvas';
-import styles from '../styles/Home.module.css';
+import Canvas from "../components/Canvas";
+import Nav from "../components/Nav";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
@@ -18,9 +19,10 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Coding Chanllenges</title>
+        <title>Coding Challenges</title>
       </Head>
       <main className={styles.main}>
+        <Nav activePage={0} />
         <h1>Coding Challenges</h1>
         <Canvas draw={draw} options={options} />
       </main>

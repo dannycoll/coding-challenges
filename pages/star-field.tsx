@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { NextPage } from 'next';
+import { NextPage } from "next";
 
-import StarField from '../components/StarField';
-import StarFieldSettings from '../components/StarFieldSettings';
-import styles from '../styles/Home.module.css';
+import StarField from "../components/StarField";
+import StarFieldSettings from "../components/StarFieldSettings";
+import styles from "../styles/Home.module.css";
+import Nav from "../components/Nav";
 
 const StarProcessing: NextPage = () => {
   const [canvasHeight, setCanvasHeight] = useState(400);
@@ -15,6 +16,7 @@ const StarProcessing: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
+        <Nav activePage={1} />
         <h1>Star Field</h1>
         <StarField
           canvasHeight={canvasHeight}
