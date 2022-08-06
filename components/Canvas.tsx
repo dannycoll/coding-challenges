@@ -18,7 +18,14 @@ const Canvas = (props: CanvasProps) => {
   const { context, ...moreConfig } = options as CanvasOptions;
 
   const canvasRef = useCanvas(draw as drawFn, { context });
-  return <canvas ref={canvasRef} height={height} width={width} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      height={height}
+      width={width}
+      style={{ background: options?.background }}
+    />
+  );
 };
 
 export default Canvas;

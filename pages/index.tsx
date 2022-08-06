@@ -3,10 +3,9 @@ import Head from 'next/head';
 
 import Canvas from '../components/Canvas';
 import styles from '../styles/Home.module.css';
-import { context } from '../types/canvas';
 
 const Home: NextPage = () => {
-  const draw = (ctx: context, frameCount: number) => {
+  const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = "#000000";
     ctx.beginPath();
