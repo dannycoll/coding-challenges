@@ -8,16 +8,16 @@ export const scaleInRange = (
 
 
 export const hexToRgba = (hexCode: string, opacity: number) => {
-    var hex = hexCode.replace('#', '');
+    let hex = hexCode.replace('#', '');
 
     if (hex.length === 3) {
         hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
 
-    var r = parseInt(hex.substring(0,2), 16)
-    var g = parseInt(hex.substring(2,4), 16)
-    var b = parseInt(hex.substring(4,6), 16);
-    var a = opacity >1 ? opacity / 100 : opacity;
+    let r = parseInt(hex.substring(0,2), 16)
+    let g = parseInt(hex.substring(2,4), 16)
+    let b = parseInt(hex.substring(4,6), 16);
+    let a = opacity >1 ? opacity / 100 : opacity;
 
     return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
   }

@@ -1,7 +1,4 @@
 import { Tab, Tabs } from "@mui/material";
-import Link from "next/link";
-import { env } from "process";
-import { useState } from "react";
 import { MenuItem } from "../types/nav";
 
 interface LinkTabProps {
@@ -13,7 +10,7 @@ const LinkTab = (props: LinkTabProps) => {
   return (
     <Tab
       component="a"
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {}}
+      onClick={() => {}}
       {...props}
     />
   );

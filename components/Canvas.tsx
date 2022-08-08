@@ -15,7 +15,7 @@ interface CanvasProps {
 
 const Canvas = (props: CanvasProps) => {
   const { draw, options, height = 500, width = 500 } = props;
-  const { context, ...moreConfig } = options as CanvasOptions;
+  const { context } = options as CanvasOptions;
 
   const canvasRef = useCanvas(draw as drawFn, { context });
   return (
