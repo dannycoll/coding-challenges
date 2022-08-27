@@ -92,7 +92,7 @@ const Conways: NextPage = () => {
     <div className={styles.container}>
       <div className={styles.main}>
         <Nav activePage={2} />
-        <h1>Conway&apos;rs Game of Life</h1>
+        <h1>Conway&apos;s Game of Life</h1>
         <GameOfLifeGrid
           width={gridWidth}
           height={gridHeight}

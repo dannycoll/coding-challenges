@@ -82,11 +82,11 @@ const GameOfLifeSettings = ({
           >
             <Box sx={{ width: "100%" }}>
               <p>
-                Conway's Game of Life is a zero player game, entirely determined
-                by its initial state. It is a cellular automaton devised by John
-                Conway, a British mathematician, in 1970. It is Turing complete,
-                able to simulate a universal constructor or any other Turing
-                Machine.
+                Conway&apos;s Game of Life is a zero player game, entirely
+                determined by its initial state. It is a cellular automaton
+                devised by John Conway, a British mathematician, in 1970. It is
+                Turing complete, able to simulate a universal constructor or any
+                other Turing Machine.
               </p>
               <p>The rules are as follows:</p>
               <ul>
