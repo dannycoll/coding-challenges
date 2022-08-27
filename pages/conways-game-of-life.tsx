@@ -1,9 +1,6 @@
 import produce from "immer";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { operations } from "../components/ConwaysGameOfLife/const";
+import { useCallback, useRef, useState } from "react";
 import GameOfLifeGrid from "../components/ConwaysGameOfLife/GameOfLifeGrid";
 import GameOfLifeSettings from "../components/ConwaysGameOfLife/GameOfLifeSettings";
 import { countNeighbours } from "../components/ConwaysGameOfLife/utils";
@@ -27,7 +24,15 @@ const Conways: NextPage = () => {
     return rows;
   };
   const [grid, setGrid] = useState(() => emptyGrid());
-
+  const randomGrid = () => {
+    const rows = [];
+    for (let row = 0; row < gridHeight; row++) {
+      rows.push(
+        Array.from(Array(gridWidth), () => (Math.random() > 0.5 ? 1 : 0))
+      );
+    }
+    return rows;
+  };
   const runningRef = useRef(running);
   runningRef.current = running;
 
@@ -69,6 +74,11 @@ const Conways: NextPage = () => {
     }
   };
 
+  const onRandomise = () => {
+    setGrid(randomGrid());
+    onRun();
+  };
+
   const onClear = () => {
     // Clear grid
     setGrid(emptyGrid);
@@ -82,11 +92,21 @@ const Conways: NextPage = () => {
     <div className={styles.container}>
       <div className={styles.main}>
         <Nav activePage={2} />
+        <h1>Conway's Game of Life</h1>
+        <GameOfLifeGrid
+          width={gridWidth}
+          height={gridHeight}
+          grid={grid}
+          setGrid={setGrid}
+          aliveColor={aliveColor}
+          deadColor={deadColor}
+        />
         <GameOfLifeSettings
           setSpeed={setSpeed}
           speed={speed}
           onRun={onRun}
           running={running}
+          onRandomise={onRandomise}
           onClear={onClear}
           gridHeight={gridHeight}
           setGridHeight={setGridHeight}
@@ -96,15 +116,6 @@ const Conways: NextPage = () => {
           setAliveColor={setAliveColor}
           deadColor={deadColor}
           setDeadColor={setDeadColor}
-        />
-
-        <GameOfLifeGrid
-          width={gridWidth}
-          height={gridHeight}
-          grid={grid}
-          setGrid={setGrid}
-          aliveColor={aliveColor}
-          deadColor={deadColor}
         />
         <p> Generation: {generation}</p>
       </div>

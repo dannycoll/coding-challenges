@@ -1,10 +1,20 @@
-import { Box, Button, ButtonGroup, Slider, Stack } from "@mui/material";
-import { useEffect } from "react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Collapse,
+  Paper,
+  Slider,
+  Stack,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { TwitterPicker } from "react-color";
+import InfoIcon from "@mui/icons-material/Info";
 
 interface GameOfLifeSettingsProps {
   onRun: () => void;
   onClear: () => void;
+  onRandomise: () => void;
   running: boolean;
   speed: number;
   setSpeed: (speed: number) => void;
@@ -20,6 +30,7 @@ interface GameOfLifeSettingsProps {
 const GameOfLifeSettings = ({
   onRun,
   running,
+  onRandomise,
   onClear,
   ...props
 }: GameOfLifeSettingsProps) => {
@@ -43,17 +54,65 @@ const GameOfLifeSettings = ({
   const handleDeadColorChange = (color: any) => {
     props.setDeadColor(color.hex);
   };
+  const handleChange = () => {
+    setIsOpen((prev) => !prev);
+  };
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div style={{ padding: 3 }}>
       <Box alignItems="center" display="flex" flexDirection="column">
         <ButtonGroup variant="outlined">
           <Button onClick={() => onRun()}>{running ? "Stop" : "Start"}</Button>
-          {/* <Button onClick={() => onClear()}>Randomise</Button> */}
+          <Button onClick={() => onRandomise()}>Randomise</Button>
           <Button onClick={() => onClear()}>Clear</Button>
         </ButtonGroup>
       </Box>
+      <Box sx={{ width: "100%", maxWidth: "50vw", paddingTop: 3 }}>
+        <Collapse
+          orientation="vertical"
+          in={isOpen}
+          onClick={handleChange}
+          collapsedSize={25}
+          sx={{ width: "100%" }}
+        >
+          <InfoIcon />
+          <Paper
+            elevation={4}
+            sx={{ padding: 0.5, backgroundColor: "lightGray" }}
+          >
+            <Box sx={{ width: "100%" }}>
+              <p>
+                Conway's Game of Life is a zero player game, entirely determined
+                by its initial state. It is a cellular automaton devised by John
+                Conway, a British mathematician, in 1970. It is Turing complete,
+                able to simulate a universal constructor or any other Turing
+                Machine.
+              </p>
+              <p>The rules are as follows:</p>
+              <ul>
+                <li>
+                  Any live cell with fewer than two live neighbours dies, as if
+                  caused by under-population.
+                </li>
+                <li>
+                  Any live cell with two or three live neighbours lives on to
+                  the next generation.
+                </li>
+                <li>
+                  Any live cell with more than three live neighbours dies, as if
+                  by overcrowding.
+                </li>
+                <li>
+                  Any dead cell with exactly three live neighbours becomes a
+                  live cell, as if by reproduction.
+                </li>
+              </ul>
+            </Box>
+          </Paper>
+        </Collapse>
+      </Box>
       <Box gap={0.5}>
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Stack spacing={1} direction="row" alignItems="center" height={30}>
           <p style={{ width: 200 }}>Grid Width</p>
           <Slider
             aria-label="Width"
@@ -64,7 +123,7 @@ const GameOfLifeSettings = ({
             onChange={handleWidthChange}
           />
         </Stack>
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Stack spacing={1} direction="row" alignItems="center" height={30}>
           <p style={{ width: 200 }}>Grid Height</p>
           <Slider
             aria-label="Height"
@@ -75,7 +134,7 @@ const GameOfLifeSettings = ({
             onChange={handleHeightChange}
           />
         </Stack>
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Stack spacing={1} direction="row" alignItems="center" height={30}>
           <p style={{ width: 200 }}>Speed</p>
           <Slider
             aria-label="Height"
