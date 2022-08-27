@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { NextPage } from "next";
 
-import StarField from "../components/StarField";
-import StarFieldSettings from "../components/StarFieldSettings";
+import StarField from "../components/StarField/StarField";
+import StarFieldSettings from "../components/StarField/StarFieldSettings";
 import styles from "../styles/Home.module.css";
 import Nav from "../components/Nav";
 

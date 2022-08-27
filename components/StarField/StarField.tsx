@@ -1,6 +1,6 @@
-import { Star } from '../models/Star';
-import { hexToRgba } from '../utils/helpers';
-import Canvas from './Canvas';
+import { Star } from "../../models/Star";
+import { hexToRgba } from "../../utils/helpers";
+import Canvas from "../Canvas";
 
 interface StarFieldProps {
   canvasWidth: number;

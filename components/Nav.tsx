@@ -7,13 +7,7 @@ interface LinkTabProps {
 }
 
 const LinkTab = (props: LinkTabProps) => {
-  return (
-    <Tab
-      component="a"
-      onClick={() => {}}
-      {...props}
-    />
-  );
+  return <Tab component="a" onClick={() => {}} {...props} />;
 };
 interface NavProps {
   activePage: number;
@@ -22,6 +16,7 @@ const Nav = (props: NavProps) => {
   const menuItems: MenuItem[] = [
     { name: "Home", link: "/" },
     { name: "Star Field", link: "/star-field" },
+    { name: "Conways Game of Life", link: "/conways-game-of-life" },
   ];
   return (
     <nav>
