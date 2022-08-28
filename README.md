@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 [![ESLint](https://github.com/dannycoll/coding-challenges/actions/workflows/eslint.yml/badge.svg?branch=main)](https://github.com/dannycoll/coding-challenges/actions/workflows/eslint.yml)
+[![CodeQL](https://github.com/dannycoll/coding-challenges/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/dannycoll/coding-challenges/actions/workflows/codeql-analysis.yml)
 ## Getting Started
 
 First, run the development server:
