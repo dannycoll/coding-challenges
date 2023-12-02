@@ -8,7 +8,7 @@ import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
 const Conways: NextPage = () => {
-  const [gridHeight, setGridHeight] = useState(20);
+  const [gridHeight, setGridHeight] = useState(20)
   const [gridWidth, setGridWidth] = useState(20);
   const [aliveColor, setAliveColor] = useState("#ffffff");
   const [deadColor, setDeadColor] = useState("#000000");
