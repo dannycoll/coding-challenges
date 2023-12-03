@@ -1,4 +1,4 @@
-export const operations = [
+const operations = [
   [0, 1],
   [0, -1],
   [1, -1],
@@ -8,3 +8,5 @@ export const operations = [
   [1, 0],
   [-1, 0],
 ];
+
+export default operations;

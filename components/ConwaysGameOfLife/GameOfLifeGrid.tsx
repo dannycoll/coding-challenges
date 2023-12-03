@@ -1,48 +1,48 @@
-import produce from "immer";
-import React from "react";
+import React from 'react';
+import produce from 'immer';
 
 interface GameOfLifeGridProps {
   width: number;
-  height: number;
   grid: number[][];
   setGrid: (grid: number[][]) => void;
   aliveColor: string;
   deadColor: string;
 }
-const GameOfLifeGrid = (props: GameOfLifeGridProps) => {
+
+function GameOfLifeGrid(props: GameOfLifeGridProps) {
+  const {
+    grid, setGrid, width, aliveColor, deadColor,
+  } = props;
   const onCell = (i: number, j: number) => {
-    props.setGrid(
-      produce(props.grid, (gridCopy) => {
-        gridCopy[i][j] = props.grid[i][j] ? 0 : 1;
-      })
+    setGrid(
+      produce(grid, (gridCopy) => {
+        // eslint-disable-next-line no-param-reassign
+        gridCopy[i][j] = grid[i][j] ? 0 : 1;
+      }),
     );
   };
 
+  const getKey = (i: number, j: number) => `${i}-${j}`;
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(${props.width}, 20px)`,
-      }}
-    >
-      {props.grid.map((rows, i) =>
-        rows.map((col, k) => (
-          <div
-            key={`${i}-${k}`}
-            onClick={() => onCell(i, k)}
-            style={{
-              width: 20,
-              height: 20,
-              backgroundColor: props.grid[i][k]
-                ? props.aliveColor
-                : props.deadColor,
-              border: `solid 1px ${props.aliveColor}`,
-            }}
-          />
-        ))
-      )}
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${width}, 20px)` }}>
+      {grid.map((rows, i) => rows.map((_, k) => (
+        <div
+          key={getKey(i, k)}
+          onClick={() => onCell(i, k)}
+          onKeyDown={() => {}}
+          style={{
+            width: 20,
+            height: 20,
+            backgroundColor: grid[i][k]
+              ? aliveColor
+              : deadColor,
+            border: `solid 1px ${aliveColor}`,
+          }}
+          role="presentation"
+        />
+      )))}
     </div>
   );
-};
+}
 
 export default GameOfLifeGrid;

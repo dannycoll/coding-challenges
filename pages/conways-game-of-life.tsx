@@ -1,24 +1,23 @@
-import produce from "immer";
-import type { NextPage } from "next";
-import { useCallback, useRef, useState } from "react";
-import GameOfLifeGrid from "../components/ConwaysGameOfLife/GameOfLifeGrid";
-import GameOfLifeSettings from "../components/ConwaysGameOfLife/GameOfLifeSettings";
-import { countNeighbours } from "../components/ConwaysGameOfLife/utils";
-import Nav from "../components/Nav";
-import styles from "../styles/Home.module.css";
+import produce from 'immer';
+import React, { useCallback, useRef, useState } from 'react';
+import GameOfLifeGrid from '../components/ConwaysGameOfLife/GameOfLifeGrid';
+import GameOfLifeSettings from '../components/ConwaysGameOfLife/GameOfLifeSettings';
+import countNeighbours from '../components/ConwaysGameOfLife/utils';
+import Nav from '../components/Nav';
+import styles from '../styles/Home.module.css';
 
-const Conways: NextPage = () => {
+function Conways() {
   const [gridHeight, setGridHeight] = useState(20);
   const [gridWidth, setGridWidth] = useState(20);
-  const [aliveColor, setAliveColor] = useState("#ffffff");
-  const [deadColor, setDeadColor] = useState("#000000");
+  const [aliveColor, setAliveColor] = useState('#ffffff');
+  const [deadColor, setDeadColor] = useState('#000000');
   const [running, setRunning] = useState(false);
   const [generation, setGeneration] = useState(0);
   const [speed, setSpeed] = useState(500);
 
   const emptyGrid = () => {
     const rows = [];
-    for (let row = 0; row < gridHeight; row++) {
+    for (let row = 0; row < gridHeight; row += 1) {
       rows.push(Array.from(Array(gridWidth), () => 0));
     }
     return rows;
@@ -26,9 +25,9 @@ const Conways: NextPage = () => {
   const [grid, setGrid] = useState(() => emptyGrid());
   const randomGrid = () => {
     const rows = [];
-    for (let row = 0; row < gridHeight; row++) {
+    for (let row = 0; row < gridHeight; row += 1) {
       rows.push(
-        Array.from(Array(gridWidth), () => (Math.random() > 0.5 ? 1 : 0))
+        Array.from(Array(gridWidth), () => (Math.random() > 0.5 ? 1 : 0)),
       );
     }
     return rows;
@@ -42,23 +41,21 @@ const Conways: NextPage = () => {
     if (!runningRef.current) return;
 
     // Update grid
-    setGrid((grid) => {
-      return produce(grid, (gridCopy: number[][]) =>
-        grid.forEach((row, i) =>
-          row.forEach((cell, j) => {
-            if (cell > 0) gridCopy[i][j] += 1;
+    //
+    setGrid((newGrid) => produce(newGrid, (gridCopy: number[][]) => newGrid.forEach(
+      (row, i) => row.forEach((cell, j) => {
+        // eslint-disable-next-line no-param-reassign
+        if (cell > 0) gridCopy[i][j] += 1;
 
-            const numNeighbours = countNeighbours(grid, i, j);
-            if (numNeighbours < 2 || numNeighbours > 3) gridCopy[i][j] = 0;
-            else if (cell === 0 && numNeighbours === 3) gridCopy[i][j] = 1;
-          })
-        )
-      );
-    });
+        const numNeighbours = countNeighbours(newGrid, i, j);
+        // eslint-disable-next-line no-param-reassign
+        if (numNeighbours < 2 || numNeighbours > 3) gridCopy[i][j] = 0;
+        // eslint-disable-next-line no-param-reassign
+        else if (cell === 0 && numNeighbours === 3) gridCopy[i][j] = 1;
+      }),
+    )));
 
-    setGeneration((generation) => {
-      return generation + 1;
-    });
+    setGeneration((newGeneration) => newGeneration + 1);
 
     setTimeout(runSimulation, 1050 - speedRef.current);
   }, []);
@@ -95,7 +92,6 @@ const Conways: NextPage = () => {
         <h1>Conway&apos;s Game of Life</h1>
         <GameOfLifeGrid
           width={gridWidth}
-          height={gridHeight}
           grid={grid}
           setGrid={setGrid}
           aliveColor={aliveColor}
@@ -117,10 +113,13 @@ const Conways: NextPage = () => {
           deadColor={deadColor}
           setDeadColor={setDeadColor}
         />
-        <p> Generation: {generation}</p>
+        <p>
+          Generation:
+          {generation}
+        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Conways;

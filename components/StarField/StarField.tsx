@@ -1,6 +1,8 @@
-import { Star } from "../../models/Star";
-import { hexToRgba } from "../../utils/helpers";
-import Canvas from "../Canvas";
+import React from 'react';
+
+import { Star } from '../../models/Star';
+import { hexToRgba } from '../../utils/helpers';
+import Canvas from '../Canvas';
 
 interface StarFieldProps {
   canvasWidth: number;
@@ -9,23 +11,23 @@ interface StarFieldProps {
   starColor: string;
   backgroundColor: string;
 }
-const StarField = (props: StarFieldProps) => {
-  const { canvasHeight, canvasWidth, numStars } = props;
+function StarField(props: StarFieldProps) {
+  const {
+    canvasHeight, canvasWidth, numStars, starColor, backgroundColor,
+  } = props;
   const stars = new Array<Star>(numStars);
-  for (let i = 0; i < stars.length; i++) {
-    stars[i] = new Star(canvasWidth, canvasHeight, props.starColor);
-  }
+  stars.map(() => new Star(canvasWidth, canvasHeight, starColor));
   const options = {
-    context: "2d",
-    background: props.backgroundColor,
+    context: '2d',
+    background: backgroundColor,
   };
-  const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    ctx.fillStyle = hexToRgba(props.backgroundColor, 0.3);
+  const draw = (ctx: CanvasRenderingContext2D) => {
+    ctx.fillStyle = hexToRgba(backgroundColor, 0.3);
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    for (let i = 0; i < stars.length; i++) {
-      stars[i].update(ctx);
-      stars[i].show(ctx);
-    }
+    stars.forEach((star) => {
+      star.update(ctx);
+      star.show(ctx);
+    });
   };
   return (
     <Canvas
@@ -35,6 +37,6 @@ const StarField = (props: StarFieldProps) => {
       options={options}
     />
   );
-};
+}
 
 export default StarField;
