@@ -3,7 +3,7 @@
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": 0,
     "no-param-reassign": "error"
   },
   "parserOptions": {
