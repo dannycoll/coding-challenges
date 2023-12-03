@@ -1,4 +1,4 @@
-import { operations } from './const';
+import operations from './const';
 
 function countNeighbours(grid: number[][], row: number, col: number) {
   let count = 0;
