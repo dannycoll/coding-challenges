@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -6,10 +8,9 @@ import {
   Paper,
   Slider,
   Stack,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import { TwitterPicker } from "react-color";
-import InfoIcon from "@mui/icons-material/Info";
+} from '@mui/material';
+import { TwitterPicker } from 'react-color';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface GameOfLifeSettingsProps {
   onRun: () => void;
@@ -27,17 +28,15 @@ interface GameOfLifeSettingsProps {
   deadColor: string;
   setDeadColor: (color: string) => void;
 }
-const GameOfLifeSettings = ({
+function GameOfLifeSettings({
   onRun,
   running,
   onRandomise,
   onClear,
   ...props
-}: GameOfLifeSettingsProps) => {
+}: GameOfLifeSettingsProps) {
   useEffect(() => {
-    console.log("GameOfLifeSettings.useEffect");
     onClear();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.gridHeight, props.gridWidth]);
   const handleWidthChange = (event: Event, newValue: number | number[]) => {
     props.setGridWidth(newValue as number);
@@ -54,33 +53,33 @@ const GameOfLifeSettings = ({
   const handleDeadColorChange = (color: any) => {
     props.setDeadColor(color.hex);
   };
+  const [isOpen, setIsOpen] = useState(false);
   const handleChange = () => {
     setIsOpen((prev) => !prev);
   };
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <div style={{ padding: 3 }}>
       <Box alignItems="center" display="flex" flexDirection="column">
         <ButtonGroup variant="outlined">
-          <Button onClick={() => onRun()}>{running ? "Stop" : "Start"}</Button>
+          <Button onClick={() => onRun()}>{running ? 'Stop' : 'Start'}</Button>
           <Button onClick={() => onRandomise()}>Randomise</Button>
           <Button onClick={() => onClear()}>Clear</Button>
         </ButtonGroup>
       </Box>
-      <Box sx={{ width: "100%", maxWidth: "50vw", paddingTop: 3 }}>
+      <Box sx={{ width: '100%', maxWidth: '50vw', paddingTop: 3 }}>
         <Collapse
           orientation="vertical"
           in={isOpen}
           onClick={handleChange}
           collapsedSize={25}
-          sx={{ width: "100%" }}
+          sx={{ width: '100%' }}
         >
           <InfoIcon />
           <Paper
             elevation={4}
-            sx={{ padding: 0.5, backgroundColor: "lightGray" }}
+            sx={{ padding: 0.5, backgroundColor: 'lightGray' }}
           >
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: '100%' }}>
               <p>
                 Conway&apos;s Game of Life is a zero player game, entirely
                 determined by its initial state. It is a cellular automaton
@@ -164,6 +163,6 @@ const GameOfLifeSettings = ({
       </Box>
     </div>
   );
-};
+}
 
 export default GameOfLifeSettings;

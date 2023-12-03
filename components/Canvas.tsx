@@ -13,8 +13,10 @@ interface CanvasProps {
   options?: CanvasOptions;
 }
 
-const Canvas = (props: CanvasProps) => {
-  const { draw, options, height = 500, width = 500 } = props;
+function Canvas(props: CanvasProps) {
+  const {
+    draw, options, height, width,
+  } = props;
   const { context } = options as CanvasOptions;
 
   const canvasRef = useCanvas(draw as drawFn, { context });
@@ -26,6 +28,13 @@ const Canvas = (props: CanvasProps) => {
       style={{ background: options?.background }}
     />
   );
+}
+
+Canvas.defaultProps = {
+  width: 500,
+  height: 500,
+  draw: undefined,
+  options: undefined,
 };
 
 export default Canvas;

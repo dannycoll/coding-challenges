@@ -4,6 +4,8 @@ import { Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
+import React from 'react';
+
 interface StarFieldSettingsProps {
   canvasWidth: number;
   canvasHeight: number;
@@ -16,29 +18,41 @@ interface StarFieldSettingsProps {
   setCanvasHeight: (value: number) => void;
   setNumStars: (value: number) => void;
 }
-const StarFieldSettings = (props: StarFieldSettingsProps) => {
+
+type Color = {
+  hex: string;
+};
+function StarFieldSettings(props: StarFieldSettingsProps) {
   const handleWidthChange = (event: Event, newValue: number | number[]) => {
-    props.setCanvasWidth(newValue as number);
+    const { setCanvasWidth } = props;
+    setCanvasWidth(newValue as number);
   };
   const handleHeightChange = (event: Event, newValue: number | number[]) => {
-    props.setCanvasHeight(newValue as number);
+    const { setCanvasHeight } = props;
+    setCanvasHeight(newValue as number);
   };
   const handleNumStarsChange = (event: Event, newValue: number | number[]) => {
-    props.setNumStars(newValue as number);
+    const { setNumStars } = props;
+    setNumStars(newValue as number);
   };
-  const handleStarColorChange = (color: any) => {
-    props.setStarColor(color.hex);
+  const handleStarColorChange = (color: Color) => {
+    const { setStarColor } = props;
+    setStarColor(color.hex);
   };
-  const handleBackgroundColorChange = (color: any) => {
-    props.setBackgroundColor(color.hex);
-  }
+  const handleBackgroundColorChange = (color: Color) => {
+    const { setBackgroundColor } = props;
+    setBackgroundColor(color.hex);
+  };
+  const {
+    canvasHeight, canvasWidth, numStars, backgroundColor, starColor,
+  } = props;
   return (
-    <Box sx={{ width: "50vw" }} gap={0.5}>
+    <Box sx={{ width: '50vw' }} gap={0.5}>
       <Stack spacing={2} direction="row" alignItems="center">
         <p style={{ width: 200 }}>Canvas Width</p>
         <Slider
           aria-label="Width"
-          value={props.canvasWidth}
+          value={canvasWidth}
           defaultValue={400}
           min={100}
           max={1000}
@@ -49,7 +63,7 @@ const StarFieldSettings = (props: StarFieldSettingsProps) => {
         <p style={{ width: 200 }}>Canvas Height</p>
         <Slider
           aria-label="Height"
-          value={props.canvasHeight}
+          value={canvasHeight}
           defaultValue={400}
           min={100}
           max={500}
@@ -60,7 +74,7 @@ const StarFieldSettings = (props: StarFieldSettingsProps) => {
         <p style={{ width: 200 }}>Number of Stars</p>
         <Slider
           aria-label="Num Stars"
-          value={props.numStars}
+          value={numStars}
           defaultValue={100}
           min={10}
           max={1000}
@@ -71,20 +85,20 @@ const StarFieldSettings = (props: StarFieldSettingsProps) => {
         <Box>
           <p>Background Colour</p>
           <TwitterPicker
-            color={props.backgroundColor}
+            color={backgroundColor}
             onChange={handleBackgroundColorChange}
           />
         </Box>
         <Box>
           <p>Star Colour</p>
           <TwitterPicker
-            color={props.starColor}
+            color={starColor}
             onChange={handleStarColorChange}
           />
         </Box>
       </Stack>
     </Box>
   );
-};
+}
 
 export default StarFieldSettings;
